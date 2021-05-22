@@ -1,6 +1,7 @@
 package com.msr.algalog.domain.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.msr.algalog.domain.model.Cliente;
 
@@ -14,4 +15,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     List<Cliente> findByNomeContaining(String nome);
 
+    Optional<Cliente> findByEmail(String email);
 }
