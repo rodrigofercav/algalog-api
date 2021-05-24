@@ -33,7 +33,7 @@ public class ClienteController {
     @GetMapping
     public List<Cliente> listar() {
 
-        return clienteRepository.findAll(); // 200
+        return clienteRepository.findAll();
     }
 
     @GetMapping("/{clienteId}")
@@ -55,37 +55,32 @@ public class ClienteController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED) // 201
+    @ResponseStatus(HttpStatus.CREATED)
     public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
-        System.out.println("entrou no adicionar.");
-        //return clienteRepository.save(cliente);
+
         return catalogoClienteService.salvar(cliente);
     }
 
     @PutMapping("/{clienteId}")
     public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId, @RequestBody Cliente cliente) {
 
-        if (!clienteRepository.existsById(clienteId)) {
+        if (!clienteRepository.existsById(clienteId))
             return ResponseEntity.notFound().build();
-        }
 
         cliente.setId(clienteId);
-        //cliente = clienteRepository.save(cliente);
         catalogoClienteService.salvar(cliente);
 
-        return ResponseEntity.ok(cliente); // 200
+        return ResponseEntity.ok(cliente);
     }
 
     @DeleteMapping("/{clienteId}")
     public ResponseEntity<Void> remover(@PathVariable Long clienteId) {
 
-        if (!clienteRepository.existsById(clienteId)) {
+        if (!clienteRepository.existsById(clienteId))
             return ResponseEntity.notFound().build();
-        }
 
-        //clienteRepository.deleteById(clienteId);
         catalogoClienteService.excluir(clienteId);
 
-        return ResponseEntity.noContent().build(); // 204
+        return ResponseEntity.noContent().build();
     }
 }

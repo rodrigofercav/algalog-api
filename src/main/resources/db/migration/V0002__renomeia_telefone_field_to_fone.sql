@@ -1,2 +1,1 @@
-ALTER TABLE public.clientes
-    RENAME telefone TO fone;
+alter table public.clientes rename telefone to fone;
